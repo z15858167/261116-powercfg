@@ -1,0 +1,78 @@
+#pragma code_page(65001)   /* 源文件为 UTF-8，必须显式声明，否则中文字符串会乱码 */
+
+#include <windows.h>
+#include "../src/resource.h"
+#include "version.h"
+
+/* 清单：comctl32 v6 + DPI 感知 + 普通权限 */
+1 24 "app.manifest"
+
+/* 应用图标：exe 属性、任务栏、Alt-Tab、托盘兜底都用它 */
+IDI_APP ICON "app.ico"
+
+/* 版本信息：可在 exe 属性 -> 详细信息 里看到，冒烟测试也会校验 */
+1 VERSIONINFO
+FILEVERSION    PT_VER_MAJOR,PT_VER_MINOR,PT_VER_PATCH,PT_VER_BUILD
+PRODUCTVERSION PT_VER_MAJOR,PT_VER_MINOR,PT_VER_PATCH,PT_VER_BUILD
+FILEOS 0x4L
+FILETYPE 0x1L
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "080404b0"
+        BEGIN
+            VALUE "CompanyName",      "PowerToggle"
+            VALUE "FileDescription",  "电源方案一键切换器"
+            VALUE "FileVersion",      PT_VER_STR
+            VALUE "InternalName",     "PowerToggle"
+            VALUE "LegalCopyright",   "Free to use"
+            VALUE "OriginalFilename", "PowerToggle.exe"
+            VALUE "ProductName",      "PowerToggle"
+            VALUE "ProductVersion",   PT_VER_STR
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x804, 1200
+    END
+END
+
+IDD_SETTINGS DIALOGEX 0, 0, 300, 236
+STYLE DS_SETFONT | DS_MODALFRAME | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_APPWINDOW
+CAPTION "PowerToggle 设置"
+FONT 9, "Microsoft YaHei UI", 400, 0, 0x86
+BEGIN
+    LTEXT           "首次使用：请选择两个要来回切换的电源方案，然后点击“保存”。", IDC_HINT, 7, 3, 286, 10
+
+    GROUPBOX        "方案 A", IDC_GRP_A, 7, 17, 286, 40
+    LTEXT           "电源方案", -1, 14, 31, 38, 9
+    COMBOBOX        IDC_CMB_A, 56, 29, 172, 90, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "颜色", -1, 234, 31, 24, 9
+    LTEXT           "", IDC_SW_A, 262, 28, 24, 15, SS_NOTIFY | SS_CENTERIMAGE | WS_BORDER
+
+    GROUPBOX        "方案 B", IDC_GRP_B, 7, 61, 286, 40
+    LTEXT           "电源方案", -1, 14, 75, 38, 9
+    COMBOBOX        IDC_CMB_B, 56, 73, 172, 90, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    LTEXT           "颜色", -1, 234, 75, 24, 9
+    LTEXT           "", IDC_SW_B, 262, 72, 24, 15, SS_NOTIFY | SS_CENTERIMAGE | WS_BORDER
+
+    LTEXT           "图标预览", IDC_LBL_PREVIEW, 14, 108, 40, 9
+    LTEXT           "", IDC_PREV_A, 60, 102, 24, 24, SS_OWNERDRAW
+    LTEXT           "", IDC_PREV_B, 92, 102, 24, 24, SS_OWNERDRAW
+    LTEXT           "悬停提示直接显示方案名称", -1, 136, 108, 130, 9
+
+    GROUPBOX        "空闲自动切换", IDC_GRP_IDLE, 7, 133, 286, 56
+    CONTROL         "启用", IDC_CHK_IDLE, "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 14, 145, 60, 10
+    LTEXT           "空闲超过", IDC_LBL_AFTER, 24, 163, 38, 9
+    EDITTEXT        IDC_EDT_MIN, 64, 161, 28, 13, ES_AUTOHSCROLL | ES_NUMBER | ES_CENTER
+    LTEXT           "分钟后切换到", IDC_LBL_TO, 108, 163, 50, 9
+    COMBOBOX        IDC_CMB_TARGET, 160, 161, 64, 90, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_CMB_CUSTOM, 228, 161, 56, 90, CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "恢复操作后切回原方案", IDC_CHK_REVERT, "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 24, 179, 130, 10
+
+    CONTROL         "开机自启动", IDC_CHK_AUTOSTART, "Button", BS_AUTOCHECKBOX | WS_TABSTOP, 14, 196, 80, 10
+
+    DEFPUSHBUTTON   "保存", IDOK, 196, 213, 45, 14
+    PUSHBUTTON      "取消", IDCANCEL, 246, 213, 45, 14
+END

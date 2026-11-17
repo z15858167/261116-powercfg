@@ -1,0 +1,53 @@
+# ---- 构建产物 ----
+build/
+out/
+bin/
+obj/
+*.exe
+*.dll
+*.obj
+*.o
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.res
+*.idb
+*.lastbuildstate
+
+# ---- 用户本地配置（不入库）----
+config.ini
+config.ini.bak.*
+PowerToggle.ini
+
+# ---- 编译中间产物（MSVC/MinGW）----
+*.aps
+*.tmp
+*.tlog
+*.iobj
+*.ipdb
+
+# ---- 日志 ----
+*.log
+*.dmp
+
+# ---- 编辑器 / IDE ----
+.vscode/
+.idea/
+.codebuddy/
+.agents/
+skills-lock.json
+*.user
+*.suo
+*.sln.docstates
+*.VC.db
+*.VC.opendb
+
+# ---- 系统文件 ----
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# ---- 内部资料（仅供本地，不上传 GitHub）----
+AGENTS.md
+docs/需求文档.md
